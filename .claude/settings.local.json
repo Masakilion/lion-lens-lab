@@ -11,7 +11,8 @@
       "Bash(git add *)",
       "Bash(git commit *)",
       "Bash(git config *)",
-      "Bash(npx vercel *)"
+      "Bash(npx vercel *)",
+      "Bash(npm install *)"
     ]
   }
 }
