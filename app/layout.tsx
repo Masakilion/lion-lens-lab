@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "TODO管理ツール",
-  description: "タスクの進捗を管理するツール",
+  title: "Lion Lens Lab（3L）| SNSリサーチ＆コンサルティング",
+  description: "見えていなかった自分が、見えてくる。SNSにレンズを当て、解像度を上げ、あなただけの戦略を描きます。",
 };
 
 export default function RootLayout({
