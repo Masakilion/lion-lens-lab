@@ -106,6 +106,45 @@ const VOICES = [
   },
 ];
 
+// タレント・インフルエンサー実績（ご本人意向により匿名）
+const TALENT_STATS = [
+  { num: "最大 +27万",  label: "フォロワー増加数（単一アカウント）" },
+  { num: "10名以上",    label: "タレント・芸能人の支援実績"        },
+  { num: "平均 4.2x",  label: "エンゲージメント率の向上倍率"       },
+  { num: "月 +dozen+", label: "支援後の案件・コラボオファー増加"    },
+];
+
+const TALENT_CASES = [
+  {
+    category: "インフルエンサー（美容・ライフスタイル）",
+    platform: "Instagram / TikTok",
+    metric:   "フォロワー 1.2万 → 28万",
+    period:   "8ヶ月",
+    note:     "投稿設計とハッシュタグ戦略を刷新。TikTokとの連動でバズを複数回創出。",
+  },
+  {
+    category: "タレント（芸能活動中）",
+    platform: "X / Instagram",
+    metric:   "フォロワー 3.8万 → 22万",
+    period:   "6ヶ月",
+    note:     "パーソナルブランドの再設計から着手。ファンとの距離感を戦略的にコントロール。",
+  },
+  {
+    category: "YouTuber（エンタメ・情報系）",
+    platform: "YouTube / X",
+    metric:   "登録者 9千 → 14.2万",
+    period:   "10ヶ月",
+    note:     "X での発信を起点に認知を拡大。YouTube への流入導線を設計し登録者が急増。",
+  },
+  {
+    category: "経営者インフルエンサー",
+    platform: "X（旧Twitter）",
+    metric:   "フォロワー 4,100 → 7.3万・案件月0→9件",
+    period:   "5ヶ月",
+    note:     "専門性を可視化する投稿戦略でフォロワーが急増。案件依頼が継続的に入るように。",
+  },
+];
+
 const FEATURES = [
   {
     icon:  "📊",
@@ -432,6 +471,72 @@ export default function CorporatePage() {
                 <p className="text-slate-700 text-sm leading-relaxed">{v.text}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== タレント・インフルエンサー実績 ===== */}
+      <section className="py-24 px-6 bg-black text-white relative overflow-hidden">
+        {/* 背景グロー */}
+        <div className="absolute top-24 left-1/3 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-16 right-1/4 w-72 h-72 bg-amber-400/8 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="relative max-w-6xl mx-auto">
+          {/* ヘッダー */}
+          <div className="text-center mb-14">
+            <p className="text-amber-400 font-bold text-sm tracking-widest mb-3">TALENT &amp; INFLUENCER</p>
+            <h2 className="text-3xl md:text-4xl font-black text-white leading-tight mb-4">
+              タレント・インフルエンサーの<br />
+              <span className="text-amber-400">支援実績も、豊富にあります。</span>
+            </h2>
+            <p className="text-slate-500 text-sm">
+              ※ ご本人・所属事務所のご意向により、お名前・活動詳細は非公開としています
+            </p>
+          </div>
+
+          {/* ビッグナンバー */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-14">
+            {TALENT_STATS.map((s) => (
+              <div key={s.label} className="border border-white/10 rounded-2xl p-6 text-center bg-white/5 backdrop-blur">
+                <div className="text-xl md:text-2xl font-black text-amber-400 mb-2 leading-tight">{s.num}</div>
+                <div className="text-xs text-slate-500 leading-relaxed">{s.label}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* 事例カード */}
+          <div className="grid md:grid-cols-2 gap-5 mb-14">
+            {TALENT_CASES.map((r) => (
+              <div key={r.category}
+                className="border border-white/10 rounded-2xl p-7 bg-white/5 hover:bg-white/8 transition-colors">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    {/* ✦ スターアイコンで「タレント」の雰囲気を演出 */}
+                    <p className="text-amber-400 font-bold text-xs tracking-wide mb-1 flex items-center gap-1.5">
+                      <span>✦</span>{r.category}
+                    </p>
+                    <p className="text-slate-400 text-xs">{r.platform}</p>
+                  </div>
+                  <span className="text-xs bg-white/10 text-slate-400 px-3 py-1 rounded-full flex-shrink-0">{r.period}</span>
+                </div>
+                <p className="text-2xl font-black text-white mb-3">{r.metric}</p>
+                <p className="text-slate-500 text-xs leading-relaxed border-t border-white/10 pt-3">{r.note}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* 詳細はご相談で */}
+          <div className="border border-amber-400/30 rounded-2xl p-8 text-center bg-amber-500/5">
+            <p className="text-slate-300 text-sm mb-2">
+              <strong className="text-white">「もっと詳しく知りたい」</strong>という方へ
+            </p>
+            <p className="text-slate-500 text-sm mb-6">
+              具体的な実績・支援内容は、守秘義務の範囲内でご相談時にお伝えしています。
+            </p>
+            <a href="#contact"
+              className="inline-block bg-amber-500 hover:bg-amber-400 text-white font-black px-8 py-3.5 rounded-full transition-colors text-sm">
+              実績の詳細を聞いてみる →
+            </a>
           </div>
         </div>
       </section>
