@@ -11,6 +11,17 @@ const firebaseConfig = {
   appId:             process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// すでに初期化済みの場合は再利用する（Next.jsのホットリロード対策）
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-export const db = getDatabase(app);
+// ビルド時や環境変数未設定時にクラッシュしないよう try/catch で保護する
+// GitHub PagesのようなサーバーレスビルドではFirebase設定が存在しないため
+let db: ReturnType<typeof getDatabase>;
+try {
+  // すでに初期化済みの場合は再利用する（Next.jsのホットリロード対策）
+  const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+  db = getDatabase(app);
+} catch {
+  // 環境変数がない場合（静的ビルド時）は null を入れておく
+  // ブラウザ上での実際の動作時はここには来ない
+  db = null as unknown as ReturnType<typeof getDatabase>;
+}
+
+export { db };
