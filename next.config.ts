@@ -5,6 +5,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "export",           // 静的HTMLとして書き出す（GitHub Pagesはサーバー不要）
   basePath: "/lion-lens-lab", // GitHub PagesのURL: https://masakilion.github.io/lion-lens-lab
+  trailingSlash: true,        // /privacy → /privacy/ と末尾スラッシュ付きで生成（GitHub Pages対応）
   images: {
     unoptimized: true,        // GitHub PagesはNext.jsの画像最適化サーバーがないため無効化
   },
