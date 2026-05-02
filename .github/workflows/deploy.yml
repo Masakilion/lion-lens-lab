@@ -34,6 +34,8 @@ jobs:
 
       - name: GitHub Pages の設定をセットアップ
         uses: actions/configure-pages@v5
+        with:
+          enablement: true  # GitHub Pagesが未設定でも自動的に有効化する
 
       - name: 依存パッケージをインストール
         run: npm ci
