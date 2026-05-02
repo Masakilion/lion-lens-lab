@@ -12,7 +12,17 @@
       "Bash(git commit *)",
       "Bash(git config *)",
       "Bash(npx vercel *)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(pip install *)",
+      "Bash(python x_research.py 'トヨタ株')",
+      "Bash(pip show *)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "Bash(python -c ' *)",
+      "Bash(python -m playwright install chromium)",
+      "Bash(python -c \"from playwright.sync_api import sync_playwright; p = sync_playwright\\(\\).start\\(\\); b = p.chromium.launch\\(\\); print\\('OK:', b.version\\); b.close\\(\\); p.stop\\(\\)\")",
+      "Bash(python -c \"import tkinter; print\\('tkinter OK'\\)\")",
+      "Bash(python -c \"from flask import Flask; print\\('Flask OK'\\)\")"
     ]
   }
 }
