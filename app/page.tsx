@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 const IMG = {
   heroBg:      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80",
@@ -736,8 +737,9 @@ export default function CorporatePage() {
         </div>
         {/* 法的ページへのリンク */}
         <div className="flex justify-center gap-6 mb-3 text-xs">
-          <a href="/privacy" className="hover:text-amber-400 transition-colors">プライバシーポリシー</a>
-          <a href="/legal"   className="hover:text-amber-400 transition-colors">特定商取引法に基づく表記</a>
+          {/* basePath（/lion-lens-lab）を自動で付けるためLinkコンポーネントを使う */}
+          <Link href="/privacy" className="hover:text-amber-400 transition-colors">プライバシーポリシー</Link>
+          <Link href="/legal"   className="hover:text-amber-400 transition-colors">特定商取引法に基づく表記</Link>
         </div>
         <p>© 2025 Lion Lens Lab. All rights reserved.</p>
       </footer>
