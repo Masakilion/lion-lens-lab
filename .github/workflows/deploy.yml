@@ -1,0 +1,58 @@
+# GitHub Pages 自動デプロイ設定
+# masterブランチにpushされるたびに自動でサイトを更新する
+
+name: GitHub Pages Deploy
+
+on:
+  push:
+    branches:
+      - master  # このブランチへのpushをトリガーにする
+
+# GitHub Pagesへの書き込み権限を付与
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時に複数のデプロイが走らないよう制御
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: リポジトリをチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Node.js をセットアップ
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: GitHub Pages の設定をセットアップ
+        uses: actions/configure-pages@v5
+
+      - name: 依存パッケージをインストール
+        run: npm ci
+
+      - name: 静的サイトをビルド
+        run: npm run build
+
+      - name: ビルド成果物をアップロード
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out  # Next.js の静的エクスポート出力先
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: GitHub Pages にデプロイ
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -17,30 +17,52 @@ const IMG = {
 };
 
 // Formspree フォームID（formspree.ioで取得後ここを更新）
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xpqbwppo";
 
-// デフォルメされたライオン＋レンズのSVGロゴ
+// スタイリッシュなジオメトリックライオン＋レンズロゴ
 function LionLensLogo() {
+  // たてがみ：シャープな三角スパイク8枚（明暗交互で立体感）
+  const spikes = [0, 45, 90, 135, 180, 225, 270, 315];
   return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      {/* レンズ外枠 */}
-      <circle cx="18" cy="18" r="16.5" stroke="#F59E0B" strokeWidth="2"/>
-      {/* たてがみ */}
-      <circle cx="18" cy="19.5" r="10.5" fill="#F59E0B"/>
-      {/* 顔 */}
-      <circle cx="18" cy="19.5" r="7" fill="#FDE68A"/>
-      {/* 左耳 */}
-      <path d="M9 13 L7 7 L13.5 11.5 Z" fill="#F59E0B"/>
-      {/* 右耳 */}
-      <path d="M27 13 L29 7 L22.5 11.5 Z" fill="#F59E0B"/>
-      {/* 左目 */}
-      <circle cx="15.5" cy="18.5" r="1.3" fill="#78350F"/>
-      {/* 右目 */}
-      <circle cx="20.5" cy="18.5" r="1.3" fill="#78350F"/>
-      {/* 鼻 */}
-      <path d="M18 21 L16.5 22.5 L19.5 22.5 Z" fill="#D97706"/>
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      {/* レンズ枠（二重リング） */}
+      <circle cx="20" cy="20" r="19.3" stroke="#78350F" strokeWidth="0.7"/>
+      <circle cx="20" cy="20" r="17.8" stroke="#F59E0B" strokeWidth="1.5"/>
+
+      {/* たてがみ：先の尖った三角スパイクを放射状に配置 */}
+      {spikes.map((angle, i) => (
+        <path key={angle}
+          d="M20 2.5 L22.4 12.2 L17.6 12.2 Z"
+          fill={i % 2 === 0 ? "#92400E" : "#D97706"}
+          transform={`rotate(${angle} 20 20)`}
+        />
+      ))}
+
+      {/* 顔ベース */}
+      <circle cx="20" cy="21" r="10.8" fill="#FDE68A"/>
+      {/* マズル */}
+      <ellipse cx="20" cy="25.8" rx="5.5" ry="4" fill="#FCD34D"/>
+
+      {/* 眉毛：内下がりの太いラインで強さ・威厳を表現 */}
+      <line x1="13"   y1="16.2" x2="18"   y2="17.9" stroke="#5C3009" strokeWidth="1.8" strokeLinecap="round"/>
+      <line x1="22"   y1="17.9" x2="27"   y2="16.2" stroke="#5C3009" strokeWidth="1.8" strokeLinecap="round"/>
+
+      {/* 左目（鋭いアーモンド形） */}
+      <path d="M13.5 19.8 Q15.8 17.3 18.3 19.8 Q15.8 22 13.5 19.8Z" fill="#5C3009"/>
+      <circle cx="15.9"  cy="19.8" r="1.4"  fill="#0C0400"/>
+      <circle cx="16.45" cy="19.1" r="0.52" fill="white"/>
+
+      {/* 右目（鋭いアーモンド形） */}
+      <path d="M21.7 19.8 Q24.2 17.3 26.5 19.8 Q24.2 22 21.7 19.8Z" fill="#5C3009"/>
+      <circle cx="24.1"  cy="19.8" r="1.4"  fill="#0C0400"/>
+      <circle cx="24.65" cy="19.1" r="0.52" fill="white"/>
+
+      {/* 鼻（逆台形・ボールド） */}
+      <path d="M18.5 23 L20 21.2 L21.5 23 Q20 24.4 18.5 23Z" fill="#C2410C"/>
+      {/* 人中 */}
+      <line x1="20" y1="23" x2="20" y2="25.2" stroke="#9A1C1C" strokeWidth="0.8" strokeLinecap="round"/>
       {/* 口 */}
-      <path d="M16.5 22.5 Q18 24 19.5 22.5" stroke="#D97706" strokeWidth="0.8" fill="none" strokeLinecap="round"/>
+      <path d="M17 25.5 Q20 28.5 23 25.5" stroke="#9A1C1C" strokeWidth="1" strokeLinecap="round" fill="none"/>
     </svg>
   );
 }
@@ -629,7 +651,7 @@ export default function CorporatePage() {
             <div className="bg-white/10 border border-amber-400/40 rounded-2xl p-10 text-center">
               <div className="text-5xl mb-4">✅</div>
               <h3 className="text-xl font-black text-white mb-2">送信が完了しました</h3>
-              <p className="text-slate-400 text-sm">内容を確認次第、info@lion-cons.com よりご連絡いたします。</p>
+              <p className="text-slate-400 text-sm">内容を確認次第、担当者よりご連絡いたします。</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -684,7 +706,7 @@ export default function CorporatePage() {
 
               {/* エラー表示 */}
               {formStatus === "error" && (
-                <p className="text-red-400 text-sm text-center">送信に失敗しました。お手数ですが <a href="mailto:info@lion-cons.com" className="underline">info@lion-cons.com</a> まで直接ご連絡ください。</p>
+                <p className="text-red-400 text-sm text-center">送信に失敗しました。お手数ですが、時間をおいて再度お試しください。</p>
               )}
 
               {/* 送信ボタン */}
@@ -697,7 +719,7 @@ export default function CorporatePage() {
               </button>
 
               <p className="text-slate-500 text-xs text-center">
-                送信内容は <strong className="text-slate-400">info@lion-cons.com</strong> に届きます
+                通常1〜2営業日以内にご返信いたします
               </p>
             </form>
           )}
@@ -706,11 +728,16 @@ export default function CorporatePage() {
 
       {/* ===== フッター ===== */}
       <footer className="bg-slate-950 text-slate-500 text-sm py-8 px-6 text-center">
-        <div className="flex items-center justify-center gap-2 mb-2">
+        <div className="flex items-center justify-center gap-2 mb-3">
           <LionLensLogo />
           <p className="font-black text-white">
             <span className="text-amber-400">Lion</span> Lens Lab
           </p>
+        </div>
+        {/* 法的ページへのリンク */}
+        <div className="flex justify-center gap-6 mb-3 text-xs">
+          <a href="/privacy" className="hover:text-amber-400 transition-colors">プライバシーポリシー</a>
+          <a href="/legal"   className="hover:text-amber-400 transition-colors">特定商取引法に基づく表記</a>
         </div>
         <p>© 2025 Lion Lens Lab. All rights reserved.</p>
       </footer>
